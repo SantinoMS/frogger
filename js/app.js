@@ -1,11 +1,19 @@
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.x = x;
+    this.y = y;
+    this.limit = 500;
+    this.randInt = function(min, max) {
+        num1 = Math.floor(Math.random() * (max - min) + min);
+        return num1;
+    };
+    this.speed = this.randInt(1, 8);
 };
 
 // Update the enemy's position, required method for game
@@ -14,7 +22,12 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-};
+    this.x += this.speed;
+        
+    if (this.x >= this.limit) {
+        this.x = -25;
+    }
+ };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -24,17 +37,39 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-
+let player = {
+    
+    update: function() {
+        
+    },
+    
+    render: function() {
+        
+    },
+    
+    handleInput: function() {
+        
+    }
+    
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
+let allEnemies = [
+    sam = new Enemy(-25, 50),
+    bill = new Enemy(-25, 100),
+    teresa = new Enemy(-25, 150),
+    paul = new Enemy(-25, 200),
+    joe = new Enemy(-25, 250),
+    bob = new Enemy(-25, 300)
+];
 
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+// Changed it to 'keydown'
+document.addEventListener('keydown', function(e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
