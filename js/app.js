@@ -39,16 +39,50 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 let player = {
     
+    sprite: "images/char-boy.png",
+    x: 200,
+    y: 400,
+    keyPressed: null,
+    
     update: function() {
-        
+        sprite = this.sprite;
+        x = this.x;
+        y = this.y;
     },
     
     render: function() {
-        
+        ctx.drawImage(Resources.get(sprite), x, y);
+        console.log('X: ' + this.x + ', Y: ' + this.y);
     },
     
-    handleInput: function() {
-        
+    handleInput: function(keyPressedPriv) {
+        this.keyPressed = keyPressedPriv;
+        switch (this.keyPressed) {
+            case 'left':
+            
+                if (this.x != 10)
+                    {this.x -= 95;};
+                break;
+                
+            case 'up':
+                
+                if (this.y != -25)
+                    {this.y -= 85;};
+                break;
+                
+            case 'right':
+                
+                if (this.x != 390)
+                    {this.x += 95;};
+                break;
+                
+            case 'down':
+                
+                if (this.y != 400)
+                    {this.y += 85;};
+                break;
+            
+        };
     }
     
 };
@@ -57,18 +91,15 @@ let player = {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [
-    sam = new Enemy(-25, 50),
-    bill = new Enemy(-25, 100),
-    teresa = new Enemy(-25, 150),
-    paul = new Enemy(-25, 200),
-    joe = new Enemy(-25, 250),
-    bob = new Enemy(-25, 300)
+    paul = new Enemy(-25, 50),
+    joe = new Enemy(-25, 132),
+    bob = new Enemy(-25, 214)
 ];
 
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-// Changed it to 'keydown'
+// Changed to keydown
 document.addEventListener('keydown', function(e) {
     var allowedKeys = {
         37: 'left',
